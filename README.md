@@ -63,7 +63,43 @@ popularmente usadas em NLP.
 
 Simplificando, o score ou a pontuação de similaridade do cosseno de dois
 vetores é o cosseno do ângulo entre os vetores. Matematicamente, é a
-razão entre o produto escalar dos vetores e o produto da magnitude dos
+razão entre o produto escalar (*dot product*) dos vetores e o produto da magnitude dos
 dois vetores.
 
-![](www/fig2.png)
+![](www/fig2.png) A magnitude de um vetor é essencialmente o comprimento
+do vetor. Matematicamente, é definido como a raiz quadrada da soma dos
+quadrados dos valores em todas as dimensões de um vetor.
+
+Sejam dois vetories A e B, em que A:(4,7,1) e B:(5,2,3). Então, o
+produto escalar dos vetores será dado por
+<img src="https://latex.codecogs.com/svg.image?(4*5)&space;&plus;&space;(7*2)&space;&plus;&space;(1*3)" title="(4*5) + (7*2) + (1*3)" />
+e o produto da magnitude dos dois vetores será dado por
+<img src="https://latex.codecogs.com/svg.image?(4^2&space;&plus;&space;7^2&space;&plus;&space;1)^{1/2}&space;*&space;(5^2&space;&plus;&space;2^2&space;&plus;&space;3^2)^{1/2}" title="(4^2 + 7^2 + 1)^{1/2} * (5^2 + 2^2 + 3^2)^{1/2}" />
+
+![](www/fig3.png)
+
+Como a pontuação do cosseno é simplesmente o cosseno do ângulo entre
+dois vetores, seu valor é limitado entre -1 e 1. No entanto, em NLP, os
+vetores de documento quase sempre usam pesos não negativos. Portanto, as
+pontuações de cosseno variam entre 0 e 1, onde 0 indica nenhuma
+semelhança e 1 indica que os documentos são idênticos.
+
+> Em NLP, the cosine score varia entre 0 e 1, onde 0 indica nenhuma
+> semelhança e 1 indica que os documentos são idênticos.
+
+## Implementação utilizando o scikit-learn
+
+``` python
+# Import the cosine_similarity
+from sklearn.metrics.pairwise import cosine_similarity
+
+# Define two 3-dimensional vectors A and B
+A = (4,7,1)
+B = (5,2,3)
+
+# Compute the cosine score of A and B
+score = cosine_similarity([A],[B])
+
+# Print the cosine score
+print(score)
+```
