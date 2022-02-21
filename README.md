@@ -1,9 +1,9 @@
 README
 ================
 
-## Term frequency-inverse document frequency (TD-IDF)
+## Term frequency-inverse document frequency (TF-IDF)
 
-TD-IDF baseia-se na ideia de que o peso de um termo em um documento deve
+TF-IDF baseia-se na ideia de que o peso de um termo em um documento deve
 ser proporcional à sua frequência e função inversa do número de
 documentos em que ocorre.
 
@@ -103,3 +103,25 @@ score = cosine_similarity([A],[B])
 # Print the cosine score
 print(score)
 ```
+ 
+## Construindo um recomendador de filmes
+
+Utilizaremos vetores tf-idf e pontuações de cosseno para construir um sistema de recomendação que sugere filmes com base na similaridade de enredos. Nossa tarefa é construir um sistema que receba o título de um filme e produza uma lista de filmes com enredos semelhantes. Por exemplo, se utilizarmos o filme 'O Poderoso Chefão', poderíamos esperar filmes listados que têm a ver com crime e gângsteres.
+
+## Etapas
+
+1. Pré-processamento de texto
+2. Gerar vetores tf-idf
+3. Gerar matriz de similaridade de cosseno
+4. Construir uma função de recomendação
+
+A função de recomendação possui 03 argumentos: o título do filme, a matriz de similaridade de cosseno e uma série de índices. A função extrai as pontuações de semelhança de cosseno par a par de um filme com todos os outros filmes do dataset. Em seguida, ela classifica essas pontuações em ordem decrescente. Finalmente, ela produz os títulos dos filmes correspondentes às pontuações mais altas de similaridade. Observe que a função ignora a pontuação de similaridade mais alta (score = 1). Isso ocorre porque o filme mais semelhante a um determinado filme é o próprio filme!
+
+**Uma dica é substituir a função cosine_similarity por linear_kernel. A saída permanece a mesma, mas leva muito menos tempo para calcular.** A diferença no tempo de execução entre as duas funções foi pequena (0.357 v. 0.339 seconds), porém quando se está trabalhando com um grande volume de dados e seus vetores estão na representação tf-idf, é uma boa prática utilizar linear_kernel para obter um melhor desempenho.
+
+
+
+
+
+
+
