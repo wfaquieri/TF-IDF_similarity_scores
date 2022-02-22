@@ -26,7 +26,7 @@ documentos deve receber um peso maior em relação a uma outra palavra que
 aparece muitas vezes em todos os documentos, pois **caracteriza** o
 documento.
 
-O que acontece com uma palavra que aparece n vezes em documento, ma
+O que acontece com uma palavra que aparece n vezes em documento, mas
 também está presente em todos os outros documentos? Na verdade, o peso
 tf-idf para essa palavra em cada documento será 0. Isso ocorre porque a
 frequência inversa do documento é constante em todos os documentos em um
@@ -118,6 +118,24 @@ Utilizaremos vetores tf-idf e pontuações de cosseno para construir um sistema 
 A função de recomendação possui 03 argumentos: o título do filme, a matriz de similaridade de cosseno e uma série de índices. A função extrai as pontuações de semelhança de cosseno par a par de um filme com todos os outros filmes do dataset. Em seguida, ela classifica essas pontuações em ordem decrescente. Finalmente, ela produz os títulos dos filmes correspondentes às pontuações mais altas de similaridade. Observe que a função ignora a pontuação de similaridade mais alta (score = 1). Isso ocorre porque o filme mais semelhante a um determinado filme é o próprio filme!
 
 **Uma dica é substituir a função cosine_similarity por linear_kernel. A saída permanece a mesma, mas leva muito menos tempo para calcular.** A diferença no tempo de execução entre as duas funções foi pequena (0.357 v. 0.339 seconds), porém quando se está trabalhando com um grande volume de dados e seus vetores estão na representação tf-idf, é uma boa prática utilizar linear_kernel para obter um melhor desempenho.
+
+
+## O problema com Bag-of-Words e TF-IDF
+
+Considere três frases:
+
+1. "estou feliz"
+2. "estou alegre" 
+3. "estou triste"
+
+Agora, se fôssemos computar as semelhanças, "estou feliz" e "estou alegre" teriam a mesma pontuação que "estou feliz" e "estou triste", independentemente de como vetorizarmos. Isso ocorre porque 'feliz', 'alegre' e 'triste' são consideradas palavras completamente diferentes. No entanto, sabemos que feliz e alegre são mais parecidos entre si do que triste. Isso é algo que as técnicas de vetorização que abordamos até agora simplesmente não conseguem capturar.
+
+
+## Word embeddings
+
+Word embedding é o processo de mapeamento de palavras em um espaço vetorial n-dimensional. Esses vetores geralmente são produzidos usando modelos de aprendizado profundo e grandes quantidades de dados. Uma vez gerados, esses vetores podem ser usados para discernir a semelhança entre duas palavras. Consequentemente, eles também podem ser usados para detectar sinônimos e antônimos. Também são capazes de capturar relacionamentos complexos. Por exemplo, pode ser usado para detectar que as palavras "rei" e "rainha" se relacionam da mesma maneira que "homem" e "mulher". Ou que a "França" e "Paris" estão relacionadas da mesma forma que as palavras "Rússia" e "Moscou". Uma última coisa a ser observada é que as incorporações de palavras (*word embedding*) não são treinadas nos dados do usuário; eles dependem do modelo espacial pré-treinado.
+
+
 
 
 

@@ -393,3 +393,82 @@ cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
  
 # Generate recommendations 
 print(get_recommendations('5 ways to kill your dreams', cosine_sim, indices))
+
+
+
+
+
+
+
+## Incorporação de palavras (*word embedding*)
+
+# sent = 
+# 'I like apples and oranges'
+
+# Create the doc object
+doc = nlp(sent)
+
+# Compute pairwise similarity scores
+for token1 in doc:
+  for token2 in doc:
+    print(token1.text, token2.text, token1.similarity(token2))
+    
+# I I 1.0
+# I like 0.023032807
+# I apples 0.10175116
+# I and 0.047492094
+# I oranges 0.10894456
+# like I 0.023032807
+# like like 1.0
+# like apples 0.015370452
+# like and 0.189293
+# like oranges 0.021943133
+# apples I 0.10175116
+# apples like 0.015370452
+# apples apples 1.0
+# apples and -0.17736834
+# apples oranges 0.6315578
+# and I 0.047492094
+# and like 0.189293
+# and apples -0.17736834
+# and and 1.0
+# and oranges 0.018627528
+# oranges I 0.10894456
+# oranges like 0.021943133
+# oranges apples 0.6315578
+# oranges and 0.018627528
+# oranges oranges 1.0
+
+
+## Observe como as palavras 'apples'e 'oranges'têm a maior pontuação de 
+## semelhança de pares. Isso é esperado, pois ambos são frutos e estão mais 
+## relacionados entre si do que qualquer outro par de palavras.
+
+
+# Computação de semelhança de músicas do Pink Floyd
+
+# este exercício final, você recebeu as letras de três músicas da banda 
+# britânica Pink Floyd, a saber 'High Hopes', 'Hey You' e 'Mother'. As letras 
+# dessas músicas estão disponíveis como hopes, heye motherrespectivamente.
+
+# Create Doc objects
+mother_doc = nlp(mother)
+hopes_doc = nlp(hopes)
+hey_doc = nlp(hey)
+
+# Print similarity between mother and hopes
+print(mother_doc.similarity(hopes_doc))
+# 0.6006234924640204
+
+
+# Print similarity between mother and hey
+print(mother_doc.similarity(hey_doc))
+# 0.9135920924498578
+
+# Observe que 'Mother' e 'Hey You' têm uma pontuação de 0,9, 
+# enquanto 'Mother' e 'High Hopes' têm uma pontuação de apenas 0,6. 
+# Provavelmente porque 'Mother' e 'Hey You' eram músicas do mesmo álbum 
+# 'The Wall' e foram escritas por Roger Waters. Por outro lado, 'High Hopes' 
+# fez parte do álbum 'Division Bell' com letras de David Gilmour e sua esposa, 
+# Penny Samson. 
+
